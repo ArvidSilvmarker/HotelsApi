@@ -15,15 +15,21 @@ namespace HotelsApi.Infrastructure
             context.SaveChanges();
         }
 
-        public void RemoveRegion(Region region)
-        {
-            context.Regions.Remove(region);
-            context.SaveChanges();
-        }
-
         public List<Region> ReadAllRegions()
         {
             return context.Regions.ToList();
+        }
+
+        public void UpdateRegion(Region region)
+        {
+            context.Regions.Update(region);
+            context.SaveChanges();
+        }
+
+        public void DeleteRegion(Region region)
+        {
+            context.Regions.Remove(region);
+            context.SaveChanges();
         }
 
         public void ReSeedRegions()

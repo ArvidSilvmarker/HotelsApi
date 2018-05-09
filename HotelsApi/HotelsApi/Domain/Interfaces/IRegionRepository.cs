@@ -8,8 +8,10 @@ namespace HotelsApi.Domain.Interfaces
     public interface IRegionRepository
     {
         void CreateRegion(Region region);
-        void RemoveRegion(Region region);
         List<Region> ReadAllRegions();
+        void UpdateRegion(Region region);
+        void DeleteRegion(Region region);
+
         void ReSeedRegions();
     }
 }
