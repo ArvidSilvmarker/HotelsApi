@@ -17,17 +17,17 @@ namespace HotelsApi.Domain
             {
                 new Region
                 {
-                    Id = 50,
+                    Value = 50,
                     Name = "Göteborg Centrum"
                 },
                 new Region
                 {
-                    Id = 60,
+                    Value = 60,
                     Name = "Göteborg Hisingen"
                 },
                 new Region
                 {
-                    Id = 70,
+                    Value = 70,
                     Name = "Helsingborg"
                 }
 
