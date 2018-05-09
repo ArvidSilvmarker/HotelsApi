@@ -43,8 +43,8 @@ namespace HotelsApi.Infrastructure
 
         private void ClearAll()
         {
-            context.Database.EnsureCreated();
             context.Database.EnsureDeleted();
+            context.Database.EnsureCreated();
         }
     }
 }
