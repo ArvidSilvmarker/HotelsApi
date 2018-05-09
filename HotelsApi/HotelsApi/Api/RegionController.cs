@@ -26,50 +26,37 @@ namespace HotelsApi.Controllers
                 return BadRequest("Region is null");
             }
 
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             _regionRepository.CreateRegion(region);
 
             return Ok(region.Id);
         }
-        
 
+        [HttpPost, Route("delete")]
+        public IActionResult DeleteRegion(Region region)
+        {
+            _regionRepository.DeleteRegion(region);
+            return Ok("Deleted");
+        }
 
-        /*
-            Lägga till en region
-            Ta bort en region
-            Hämta alla regioner
-            Återställa alla regioner: rensar tabellen och sätter de tre regionerna på nytt
-         */
-
-        // GET api/values
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult GetAllReagions()
         {
-            return new string[] { "value1", "value2" };
+            var listOfRegions = _regionRepository.ReadAllRegions();
+            return Json(listOfRegions);
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpPost("Seed")]
+        public IActionResult Seed()
         {
-            return "value";
+            _regionRepository.ReSeedRegions();
+            return Ok();
         }
 
-        // POST api/values
-        [HttpPost]
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+       
     }
 }
