@@ -44,8 +44,10 @@ namespace HotelsApi.Infrastructure
 
         private void ClearAll()
         {
-            context.Database.EnsureDeleted();
-            context.Database.EnsureCreated();
+            foreach (var region in ReadAllRegions())
+            { 
+                DeleteRegion(region.Id);
+            }
         }
     }
 }
