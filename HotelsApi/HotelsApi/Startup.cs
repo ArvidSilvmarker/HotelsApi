@@ -31,8 +31,17 @@ namespace HotelsApi
         {
             if (env.IsDevelopment())
             {
+                app.UseBrowserLink();
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseExceptionHandler("Error");
+            }
+
+            app.UseStaticFiles();
+            app.UseStatusCodePages();
+            app.UseDirectoryBrowser();
 
             app.UseMvc();
         }
