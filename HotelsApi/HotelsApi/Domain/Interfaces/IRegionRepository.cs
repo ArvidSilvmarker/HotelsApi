@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace HotelsApi.Domain.Interfaces
 {
-    interface IRegionRepository
+    public interface IRegionRepository
     {
         void CreateRegion(Region region);
         void RemoveRegion(Region region);
