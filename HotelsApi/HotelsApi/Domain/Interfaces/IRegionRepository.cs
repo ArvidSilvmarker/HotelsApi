@@ -10,7 +10,7 @@ namespace HotelsApi.Domain.Interfaces
         void CreateRegion(Region region);
         List<Region> ReadAllRegions();
         void UpdateRegion(Region region);
-        void DeleteRegion(Region region);
+        void DeleteRegion(int id);
 
         void ReSeedRegions();
     }

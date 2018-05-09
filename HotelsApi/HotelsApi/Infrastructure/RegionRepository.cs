@@ -26,9 +26,10 @@ namespace HotelsApi.Infrastructure
             context.SaveChanges();
         }
 
-        public void DeleteRegion(Region region)
+        public void DeleteRegion(int id)
         {
-            context.Regions.Remove(region);
+            var delete = context.Regions.First(r => r.Id == id);
+            context.Regions.Remove(delete);
             context.SaveChanges();
         }
 
