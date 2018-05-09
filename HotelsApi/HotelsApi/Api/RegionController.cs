@@ -2,13 +2,24 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HotelsApi.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HotelsApi.Controllers
 {
-    [Route("api/[controller]")]
-    public class ValuesController : Controller
+    [Route("regions")]
+    public class RegionController : Controller
     {
+        private IRegionRepository _regionRepository;
+
+        public RegionController(IRegionRepository regionRepository)
+        {
+            _regionRepository = regionRepository;
+        }
+
+
+
+
         // GET api/values
         [HttpGet]
         public IEnumerable<string> Get()
