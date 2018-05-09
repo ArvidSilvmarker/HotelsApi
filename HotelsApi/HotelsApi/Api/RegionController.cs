@@ -36,10 +36,10 @@ namespace HotelsApi.Controllers
             return Ok(region.Id);
         }
 
-        [HttpPost, Route("delete")]
-        public IActionResult DeleteRegion(Region region)
+        [HttpDelete, Route("{id:int}")]
+        public IActionResult DeleteRegion(int id)
         {
-            _regionRepository.DeleteRegion(region);
+            _regionRepository.DeleteRegion(id);
             return Ok("Deleted");
         }
 
@@ -50,7 +50,7 @@ namespace HotelsApi.Controllers
             return Json(listOfRegions);
         }
 
-        [HttpPost("Seed")]
+        [HttpPost("seed")]
         public IActionResult Seed()
         {
             _regionRepository.ReSeedRegions();
