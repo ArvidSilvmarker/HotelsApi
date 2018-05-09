@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using HotelsApi.Domain;
+using Microsoft.EntityFrameworkCore;
 
 public class HotelContext : DbContext
 {
-    public DbSet<Region> Region { get; set; }
+    public DbSet<Region> Regions { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
