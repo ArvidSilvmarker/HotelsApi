@@ -22,6 +22,10 @@ namespace HotelsApi.Infrastructure
             context.Regions.Add(region);
             context.SaveChanges();
         }
+        public Region ReadRegion(int id)
+        {
+            return context.Regions.FirstOrDefault(r => r.Id == id);
+        }
 
         public List<Region> ReadAllRegions()
         {

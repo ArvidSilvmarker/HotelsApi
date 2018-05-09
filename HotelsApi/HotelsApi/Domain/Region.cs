@@ -11,6 +11,7 @@ namespace HotelsApi.Domain
         [Key]
         public int Id { get; set; }
         [Required]
+        [Range(0, int.MaxValue, ErrorMessage = "Value must be non-zero.")]
         public int Value { get; set; }
         [Required]
         public string Name { get; set; }

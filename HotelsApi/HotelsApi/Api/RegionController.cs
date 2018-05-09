@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using HotelsApi.Domain;
+﻿using HotelsApi.Domain;
 using HotelsApi.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace HotelsApi.Controllers
 {
     [Route("regions")]
     public class RegionController : Controller
     {
-        private IRegionRepository _regionRepository;
+        private readonly IRegionRepository _regionRepository;
 
         public RegionController(IRegionRepository regionRepository)
         {
@@ -31,16 +28,33 @@ namespace HotelsApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            _regionRepository.CreateRegion(region);
-
-            return Ok(region.Id);
+            try
+            {
+                _regionRepository.CreateRegion(region);
+                return Ok(region.Id);
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
         }
 
         [HttpDelete, Route("{id:int}")]
         public IActionResult DeleteRegion(int id)
         {
-            _regionRepository.DeleteRegion(id);
-            return Ok("Deleted");
+            try
+            {
+                var region = _regionRepository.ReadRegion(id);
+                if (region == null)
+                    return NoContent();
+
+                _regionRepository.DeleteRegion(id);
+                return Ok("Deleted");
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
         }
 
         [HttpGet]
