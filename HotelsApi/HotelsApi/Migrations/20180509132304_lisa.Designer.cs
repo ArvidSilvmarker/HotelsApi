@@ -11,8 +11,8 @@ using System;
 namespace HotelsApi.Migrations
 {
     [DbContext(typeof(HotelContext))]
-    [Migration("20180509083131_region")]
-    partial class region
+    [Migration("20180509132304_lisa")]
+    partial class lisa
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,6 +28,8 @@ namespace HotelsApi.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired();
+
+                    b.Property<int>("Value");
 
                     b.HasKey("Id");
 

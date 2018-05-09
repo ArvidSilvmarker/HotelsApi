@@ -14,10 +14,10 @@ namespace HotelsApi
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            using (var context = new HotelContext())
-            {
-                context.Database.EnsureCreated();
-            }
+            //using (var context = new HotelContext())
+            //{
+            //    context.Database.EnsureCreated();
+            //}
         }
 
         public IConfiguration Configuration { get; }
@@ -25,7 +25,7 @@ namespace HotelsApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<HotelContext>();
+            //services.AddDbContext<HotelContext>();
             services.AddSingleton<IRegionRepository, RegionRepository>();
             services.AddMvc();
         }
