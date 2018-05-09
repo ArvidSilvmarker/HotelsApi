@@ -7,13 +7,15 @@ namespace HotelsApi.Domain
 {
     public class Seed
     {
-        public List<Region> SeedRegions()
-        {
-            //Göteborg Centrum    50
-            //Göteborg Hisingen   60
-            //Helsingborg         70
+        public List<Region> SeedRegions { get; set; }
 
-            return new List<Region>
+        //Göteborg Centrum    50
+        //Göteborg Hisingen   60
+        //Helsingborg         70
+
+        public Seed()
+        {
+            SeedRegions = new List<Region>
             {
                 new Region
                 {

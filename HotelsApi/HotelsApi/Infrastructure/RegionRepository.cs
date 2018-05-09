@@ -8,7 +8,15 @@ namespace HotelsApi.Infrastructure
 {
     public class RegionRepository : IRegionRepository
     {
-        private readonly HotelContext context = new HotelContext();
+        private readonly HotelContext context;
+        private Seed seed;
+
+        public RegionRepository()
+        {
+            context = new HotelContext();
+            seed = new Seed();
+        }
+
         public void CreateRegion(Region region)
         {
             context.Regions.Add(region);
@@ -36,7 +44,9 @@ namespace HotelsApi.Infrastructure
         public void ReSeedRegions()
         {
             ClearAll();
-            foreach (var region in new Seed().SeedRegions())
+            //RecreateDatabase();
+            seed = new Seed();
+            foreach (var region in seed.SeedRegions)
             {
                 CreateRegion(region);
             }
