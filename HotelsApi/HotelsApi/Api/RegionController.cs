@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HotelsApi.Domain;
 using HotelsApi.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,8 +18,27 @@ namespace HotelsApi.Controllers
             _regionRepository = regionRepository;
         }
 
+        [HttpPost]
+        public IActionResult AddRegion(Region region)
+        {
+            if (region == null)
+            {
+                return BadRequest("Region is null");
+            }
+
+            _regionRepository.CreateRegion(region);
+
+            return Ok(region.Id);
+        }
+        
 
 
+        /*
+            Lägga till en region
+            Ta bort en region
+            Hämta alla regioner
+            Återställa alla regioner: rensar tabellen och sätter de tre regionerna på nytt
+         */
 
         // GET api/values
         [HttpGet]
