@@ -8,10 +8,12 @@ namespace HotelsApi.Domain
 {
     public class Region
     {
+        [Key]
+        public int Id { get; set; }
         [Required]
         public int Value { get; set; }
         [Required]
         public string Name { get; set; }
-        public int Id { get; set; }
+
     }
 }
