@@ -14,6 +14,10 @@ namespace HotelsApi
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            using (var context = new HotelContext())
+            {
+                context.Database.EnsureCreated();
+            }
         }
 
         public IConfiguration Configuration { get; }
