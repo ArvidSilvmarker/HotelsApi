@@ -10,7 +10,7 @@ namespace HotelsApi.Infrastructure
         public List<Hotel> ReadScandicFile()
         {
             var hotelList = new List<Hotel>();
-            string[] lines = System.IO.File.ReadAllLines($@"Scandic\Scanic-{DateTime.Now:yyyy-MM-dd}.txt");
+            string[] lines = System.IO.File.ReadAllLines($@"Scandic\Scandic-{DateTime.Now:yyyy-MM-dd}.txt");
             foreach (string line in lines)
             {
                 var hotelString = line.Split(',');
@@ -20,7 +20,6 @@ namespace HotelsApi.Infrastructure
                     Name = hotelString[1],
                     RoomsAvailable = Convert.ToInt32(hotelString[2])
                 });
-
             }
 
             return hotelList;
