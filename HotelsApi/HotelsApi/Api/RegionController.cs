@@ -2,6 +2,7 @@
 using HotelsApi.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using HotelsApi.Infrastructure;
 
 namespace HotelsApi.Controllers
 {
@@ -69,6 +70,25 @@ namespace HotelsApi.Controllers
         {
             _regionRepository.ReSeedRegions();
             return Ok();
+        }
+
+        [HttpGet("hotels")]
+        public IActionResult GetHotels()
+        {
+            IFileReader fileReader = new FileReader();
+            var hotelList = fileReader.ReadScandicFile();
+            var listOfRegions = _regionRepository.ReadAllRegions();
+            foreach (var region in listOfRegions)
+            {
+                foreach (var hotel in hotelList)
+                {
+                    if (region.Value == hotel.RegionValue)
+                    {
+                        region.Hotels.Add(hotel);
+                    }
+                }
+            }
+            return Json(listOfRegions);
         }
 
        
