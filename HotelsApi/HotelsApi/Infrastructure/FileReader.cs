@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HotelsApi.Domain;
 
 namespace HotelsApi.Infrastructure
 {
@@ -16,9 +17,14 @@ namespace HotelsApi.Infrastructure
                 var hotelString = line.Split(',');
                 hotelList.Add(new Hotel
                 {
+                    RegionValue = Convert.ToInt32(hotelString[0]),
+                    Name = hotelString[1],
+                    RoomsAvailable = Convert.ToInt32(hotelString[2])
                 });
 
             }
+
+            return hotelList;
         }
     }
 }
