@@ -10,7 +10,7 @@ namespace HotelsApi.Infrastructure
         public List<Hotel> ReadScandicFile()
         {
             var hotelList = new List<Hotel>();
-            string[] lines = System.IO.File.ReadAllLines($@"Scandic\Scandic-{DateTime.Now:yyyy-MM-dd}.txt");
+            string[] lines = System.IO.File.ReadAllLines($@"wwwroot\Scandic\Scandic-{DateTime.Now:yyyy-MM-dd}.txt");
             foreach (string line in lines)
             {
                 var hotelString = line.Split(',');
