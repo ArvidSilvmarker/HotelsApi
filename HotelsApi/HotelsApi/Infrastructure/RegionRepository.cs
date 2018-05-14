@@ -1,48 +1,49 @@
-﻿using System;
+﻿using System.Linq;
 using System.Collections.Generic;
-using System.Linq;
 using HotelsApi.Domain;
 using HotelsApi.Domain.Interfaces;
+
 
 namespace HotelsApi.Infrastructure
 {
     public class RegionRepository : IRegionRepository
     {
-        private readonly HotelContext context;
+        private readonly HotelContext _context;
         private Seed seed;
 
-        public RegionRepository()
+        public RegionRepository(HotelContext context)
         {
-            context = new HotelContext();
+            _context = context;
+            _context.Database.EnsureCreated();
             seed = new Seed();
         }
 
         public void CreateRegion(Region region)
         {
-            context.Regions.Add(region);
-            context.SaveChanges();
+            _context.Regions.Add(region);
+            _context.SaveChanges();
         }
         public Region ReadRegion(int id)
         {
-            return context.Regions.FirstOrDefault(r => r.Id == id);
+            return _context.Regions.FirstOrDefault(r => r.Id == id);
         }
 
         public List<Region> ReadAllRegions()
         {
-            return context.Regions.ToList();
+            return _context.Regions.ToList();
         }
 
         public void UpdateRegion(Region region)
         {
-            context.Regions.Update(region);
-            context.SaveChanges();
+            _context.Regions.Update(region);
+            _context.SaveChanges();
         }
 
         public void DeleteRegion(int id)
         {
-            var delete = context.Regions.First(r => r.Id == id);
-            context.Regions.Remove(delete);
-            context.SaveChanges();
+            var delete = _context.Regions.First(r => r.Id == id);
+            _context.Regions.Remove(delete);
+            _context.SaveChanges();
         }
 
         public void ReSeedRegions()
@@ -58,8 +59,8 @@ namespace HotelsApi.Infrastructure
 
         public void RecreateDatabase()
         {
-            context.Database.EnsureDeleted();
-            context.Database.EnsureCreated();
+            _context.Database.EnsureDeleted();
+            _context.Database.EnsureCreated();
         }
 
         private void ClearAll()

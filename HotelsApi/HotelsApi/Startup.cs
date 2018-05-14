@@ -3,6 +3,7 @@ using HotelsApi.Domain.Interfaces;
 using HotelsApi.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -25,7 +26,8 @@ namespace HotelsApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddDbContext<HotelContext>();
+            services.AddDbContext<HotelContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddSingleton<IRegionRepository, RegionRepository>();
             services.AddMvc();
         }

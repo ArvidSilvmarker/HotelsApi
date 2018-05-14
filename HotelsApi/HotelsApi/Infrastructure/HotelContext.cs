@@ -7,10 +7,14 @@ namespace HotelsApi.Infrastructure
     {
         public DbSet<Region> Regions { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer(
+        //        "Server = (localdb)\\mssqllocaldb; Database = db-hotels; Trusted_Connection = True; ");
+        //}
+
+        public HotelContext(DbContextOptions<HotelContext> context) : base(context)
         {
-            optionsBuilder.UseSqlServer(
-                "Server = (localdb)\\mssqllocaldb; Database = db-hotels; Trusted_Connection = True; ");
         }
     }
 
