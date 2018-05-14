@@ -75,20 +75,29 @@ namespace HotelsApi.Controllers
         [HttpGet("hotels")]
         public IActionResult GetHotels()
         {
-            IFileReader fileReader = new FileReader();
-            var hotelList = fileReader.ReadScandicFile();
-            var listOfRegions = _regionRepository.ReadAllRegions();
-            foreach (var region in listOfRegions)
+            try
             {
-                foreach (var hotel in hotelList)
+                IFileReader fileReader = new FileReader();
+
+                var hotelList = fileReader.ReadScandicFile();
+                var listOfRegions = _regionRepository.ReadAllRegions();
+                foreach (var region in listOfRegions)
                 {
-                    if (region.Value == hotel.RegionValue)
+                    foreach (var hotel in hotelList)
                     {
-                        region.Hotels.Add(hotel);
+                        if (region.Value == hotel.RegionValue)
+                        {
+                            region.Hotels.Add(hotel);
+                        }
                     }
                 }
+                return Json(listOfRegions);
             }
-            return Json(listOfRegions);
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+           
         }
 
        
