@@ -10,6 +10,13 @@ namespace HotelsApi.Infrastructure
 {
     public class FileReader : IFileReader
     {
+        public List<Hotel> ReadAllHotels()
+        {
+            var allHotels = ReadScandicFile();
+            allHotels.AddRange(ReadBestWesternHotels());
+
+            return allHotels;
+        }
         public List<Hotel> ReadScandicFile()
         {
             var dateTimeStop = new DateTime(2018, 01, 01);
@@ -25,14 +32,6 @@ namespace HotelsApi.Infrastructure
             }
                 
             return null;
-        }
-
-        public List<Hotel> ReadAllHotels()
-        {
-            var allHotels = ReadScandicFile();
-            allHotels.AddRange(ReadBestWesternHotels());
-
-            return allHotels;
         }
 
         public List<Hotel> MapScandicToHotels(string[] lines)
@@ -64,7 +63,6 @@ namespace HotelsApi.Infrastructure
                     var bestWesternHotel = JsonConvert.DeserializeObject<List<BestWesternHotel>>(File.ReadAllText($@"wwwroot\Hotels\BestWestern-{date:yyyy-MM-dd}.json"));
                     return MapBestWesternToHotels(bestWesternHotel);
                 }
-
             }
 
             return null;
@@ -80,7 +78,6 @@ namespace HotelsApi.Infrastructure
                     Name = bestWesternHotel.Name,
                     RoomsAvailable = bestWesternHotel.LedigaRum
                 });
-
             }
 
             return hotels;
