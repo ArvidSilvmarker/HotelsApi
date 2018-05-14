@@ -61,15 +61,31 @@ namespace HotelsApi.Controllers
         [HttpGet]
         public IActionResult GetAllReagions()
         {
-            var listOfRegions = _regionRepository.ReadAllRegions();
-            return Json(listOfRegions);
+            try
+            {
+                var listOfRegions = _regionRepository.ReadAllRegions();
+                return Json(listOfRegions);
+
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
         }
 
         [HttpPost("seed")]
         public IActionResult Seed()
         {
-            _regionRepository.ReSeedRegions();
-            return Ok();
+            try
+            {
+                _regionRepository.ReSeedRegions();
+                return Ok();
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
+
         }
 
         [HttpGet("hotels")]
@@ -93,9 +109,9 @@ namespace HotelsApi.Controllers
                 }
                 return Json(listOfRegions);
             }
-            catch (Exception e)
+            catch (Exception exception)
             {
-                return BadRequest(e.Message);
+                return BadRequest(exception.Message);
             }
            
         }
