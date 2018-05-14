@@ -7,7 +7,6 @@ namespace HotelsApi.Domain.Interfaces
 {
     public interface IFileReader
     {
-        List<Hotel> ReadScandicFile();
         List<Hotel> ReadAllHotels();
     }
 }
