@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using HotelsApi.Domain;
 using HotelsApi.Domain.Interfaces;
+using Newtonsoft.Json;
 
 namespace HotelsApi.Infrastructure
 {
@@ -40,6 +42,13 @@ namespace HotelsApi.Infrastructure
             }
 
             return hotelList;
+        }
+
+        public Hotel ReadBestWestern(string path)
+        {
+            var json = new WebClient().DownloadString(path);
+            var hotel = JsonConvert.DeserializeObject<Hotel>(json);
+            return hotel;
         }
     }
 }
