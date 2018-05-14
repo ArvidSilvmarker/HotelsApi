@@ -16,10 +16,10 @@ namespace HotelsApi.Infrastructure
 
             for (var date = DateTime.Now; date > dateTimeStop; date = date.AddDays(-1))
             {
-                if (File.Exists($@"wwwroot\Scandic\Scandic-{date:yyyy-MM-dd}.txt"))
+                if (File.Exists($@"wwwroot\Hotels\Scandic-{date:yyyy-MM-dd}.txt"))
                 {
-                    string[] lines = File.ReadAllLines($@"wwwroot\Scandic\Scandic-{date:yyyy-MM-dd}.txt");
-                    return MapHotels(lines);
+                    string[] lines = File.ReadAllLines($@"wwwroot\Hotels\Scandic-{date:yyyy-MM-dd}.txt");
+                    return MapScandicToHotels(lines);
                 }
                
             }
@@ -27,7 +27,15 @@ namespace HotelsApi.Infrastructure
             return null;
         }
 
-        public List<Hotel> MapHotels(string[] lines)
+        public List<Hotel> ReadAllHotels()
+        {
+            var allHotels = ReadScandicFile();
+            allHotels.AddRange(ReadBestWesternHotels());
+
+            return allHotels;
+        }
+
+        public List<Hotel> MapScandicToHotels(string[] lines)
         {
             var hotelList = new List<Hotel>();
             foreach (string line in lines)
@@ -44,11 +52,38 @@ namespace HotelsApi.Infrastructure
             return hotelList;
         }
 
-        public Hotel ReadBestWestern(string path)
+
+        public List<Hotel> ReadBestWesternHotels()
         {
-            var json = new WebClient().DownloadString(path);
-            var hotel = JsonConvert.DeserializeObject<Hotel>(json);
-            return hotel;
+            var dateTimeStop = new DateTime(2018, 01, 01);
+
+            for (var date = DateTime.Now; date > dateTimeStop; date = date.AddDays(-1))
+            {
+                if (File.Exists($@"wwwroot\Hotels\BestWestern-{date:yyyy-MM-dd}.json"))
+                {
+                    var bestWesternHotel = JsonConvert.DeserializeObject<List<BestWesternHotel>>(File.ReadAllText($@"wwwroot\Hotels\BestWestern-{date:yyyy-MM-dd}.json"));
+                    return MapBestWesternToHotels(bestWesternHotel);
+                }
+
+            }
+
+            return null;
+        }
+
+        private List<Hotel> MapBestWesternToHotels(List<BestWesternHotel> bestWesternHotels)
+        {
+            var hotels = new List<Hotel>();
+            foreach (var bestWesternHotel in bestWesternHotels)
+            {
+                hotels.Add(new Hotel{
+                    RegionValue = bestWesternHotel.Reg,
+                    Name = bestWesternHotel.Name,
+                    RoomsAvailable = bestWesternHotel.LedigaRum
+                });
+
+            }
+
+            return hotels;
         }
     }
 }

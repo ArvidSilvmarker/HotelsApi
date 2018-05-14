@@ -79,7 +79,7 @@ namespace HotelsApi.Controllers
             {
                 IFileReader fileReader = new FileReader();
 
-                var hotelList = fileReader.ReadScandicFile();
+                var hotelList = fileReader.ReadAllHotels();
                 var listOfRegions = _regionRepository.ReadAllRegions();
                 foreach (var region in listOfRegions)
                 {

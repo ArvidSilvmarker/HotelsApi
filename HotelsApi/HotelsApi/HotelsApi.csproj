@@ -16,8 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\Scandic\Scandic-2018-05-11.txt" />
-    <None Include="wwwroot\Scandic\Scandic-2018-05-13.txt" />
+    <None Include="wwwroot\Hotels\Scandic-2018-05-11.txt" />
+    <None Include="wwwroot\Hotels\Scandic-2018-05-13.txt" />
   </ItemGroup>
 
 </Project>
