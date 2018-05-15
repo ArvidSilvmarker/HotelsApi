@@ -22,6 +22,8 @@ namespace HotelsApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var appConfiguration = Configuration.GetSection("AppConfiguration").Get<AppConfiguration>();
+            services.AddSingleton(appConfiguration);
             services.AddScoped<IRegionRepository, RegionRepository>();
             services.AddDbContext<HotelContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));

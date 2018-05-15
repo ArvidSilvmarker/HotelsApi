@@ -10,6 +10,11 @@ namespace HotelsApi.Infrastructure
 {
     public class FileReader : IFileReader
     {
+        private AppConfiguration _appConfiguration;
+        public FileReader(AppConfiguration appConfiguration)
+        {
+            _appConfiguration = appConfiguration;
+        }
         public List<Hotel> ReadAllHotels()
         {
             var allHotels = ReadScandicFile();
@@ -17,18 +22,18 @@ namespace HotelsApi.Infrastructure
 
             return allHotels;
         }
+
         public List<Hotel> ReadScandicFile()
         {
             var dateTimeStop = new DateTime(2018, 01, 01);
-
+            var path = _appConfiguration.ImportPath;
             for (var date = DateTime.Now; date > dateTimeStop; date = date.AddDays(-1))
             {
-                if (File.Exists($@"wwwroot\Hotels\Scandic-{date:yyyy-MM-dd}.txt"))
+                if (File.Exists($@"{path}\Scandic-{date:yyyy-MM-dd}.txt"))
                 {
-                    string[] lines = File.ReadAllLines($@"wwwroot\Hotels\Scandic-{date:yyyy-MM-dd}.txt");
+                    string[] lines = File.ReadAllLines($@"{path}\Scandic-{date:yyyy-MM-dd}.txt");
                     return MapScandicToHotels(lines);
                 }
-               
             }
                 
             return null;

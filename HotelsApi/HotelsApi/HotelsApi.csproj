@@ -20,4 +20,13 @@
     <None Include="wwwroot\Hotels\Scandic-2018-05-13.txt" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="wwwroot\Hotels\Scandic-2018-05-11.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\Hotels\Scandic-2018-05-13.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>
