@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using HotelsApi.Common;
 using HotelsApi.Domain;
 using HotelsApi.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -47,19 +48,23 @@ namespace HotelsApi.Infrastructure
 
         public List<Hotel> MapScandicToHotels(string[] lines)
         {
-            var hotelList = new List<Hotel>();
+            var hotels = new List<Hotel>();
             foreach (string line in lines)
             {
                 var hotelString = line.Split(',');
-                hotelList.Add(new Hotel
+                var hotel = new Hotel
                 {
                     RegionValue = Convert.ToInt32(hotelString[0].Trim()),
                     Name = hotelString[1].Trim(),
                     RoomsAvailable = Convert.ToInt32(hotelString[2].Trim())
-                });
+                };
+                if (HotelValidation.ValidateHotel(hotel))
+                    hotels.Add(hotel);
+                else
+                    throw new ArgumentException("Error in format.");
             }
 
-            return hotelList;
+            return hotels;
         }
 
 
@@ -94,16 +99,13 @@ namespace HotelsApi.Infrastructure
                     Name = bestWesternHotel.Name,
                     RoomsAvailable = bestWesternHotel.LedigaRum
                 };
-                
-                hotels.Add(hotel);
+                if (HotelValidation.ValidateHotel(hotel))
+                    hotels.Add(hotel);
+                else
+                    throw new ArgumentException("Error in format.");
             }
 
             return hotels;
-        }
-
-        public void validateHotel(Hotel hotel)
-        {
-
         }
     }
 }
