@@ -15,6 +15,7 @@ namespace HotelsApi.Infrastructure
         {
             _appConfiguration = appConfiguration;
         }
+
         public List<Hotel> ReadAllHotels()
         {
             var allHotels = ReadScandicFile();
@@ -28,6 +29,7 @@ namespace HotelsApi.Infrastructure
             var dateTimeStop = new DateTime(2018, 01, 01);
             var path = _appConfiguration.ImportPath;
             var scandicHotels = new List<Hotel>();
+
             for (var date = DateTime.Now; date > dateTimeStop; date = date.AddDays(-1))
             {
                 if (File.Exists($@"{path}\Scandic-{date:yyyy-MM-dd}.txt"))
@@ -63,12 +65,13 @@ namespace HotelsApi.Infrastructure
         {
             var dateTimeStop = new DateTime(2018, 01, 01);
             var bestWesternHotelsList = new List<Hotel>();
+            var path = _appConfiguration.ImportPath;
 
             for (var date = DateTime.Now; date > dateTimeStop; date = date.AddDays(-1))
             {
-                if (File.Exists($@"wwwroot\Hotels\BestWestern-{date:yyyy-MM-dd}.json"))
+                if (File.Exists($@"{path}\BestWestern-{date:yyyy-MM-dd}.json"))
                 {
-                    var json = File.ReadAllText($@"wwwroot\Hotels\BestWestern-{date:yyyy-MM-dd}.json");
+                    var json = File.ReadAllText($@"{path}\BestWestern-{date:yyyy-MM-dd}.json");
                     var bestWesternHotel = JsonConvert.DeserializeObject<List<BestWesternHotel>>(json);
                     bestWesternHotelsList = MapBestWesternToHotels(bestWesternHotel);
                     break;
@@ -78,7 +81,7 @@ namespace HotelsApi.Infrastructure
             return bestWesternHotelsList;
         }
 
-        private List<Hotel> MapBestWesternToHotels(List<BestWesternHotel> bestWesternHotels)
+        public List<Hotel> MapBestWesternToHotels(List<BestWesternHotel> bestWesternHotels)
         {
             var hotels = new List<Hotel>();
             foreach (var bestWesternHotel in bestWesternHotels)
