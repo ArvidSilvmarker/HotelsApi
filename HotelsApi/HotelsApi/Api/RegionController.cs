@@ -10,10 +10,12 @@ namespace HotelsApi.Controllers
     public class RegionController : Controller
     {
         private readonly IRegionRepository _regionRepository;
+        private IFileReader _fileReader;
 
-        public RegionController(IRegionRepository regionRepository)
+        public RegionController(IRegionRepository regionRepository, AppConfiguration appConfiguration)
         {
             _regionRepository = regionRepository;
+            _fileReader = new FileReader(appConfiguration);
         }
 
         [HttpPost]
@@ -93,9 +95,9 @@ namespace HotelsApi.Controllers
         {
             try
             {
-                IFileReader fileReader = new FileReader();
 
-                var hotelList = fileReader.ReadAllHotels();
+
+                var hotelList = _fileReader.ReadAllHotels();
                 var listOfRegions = _regionRepository.ReadAllRegions();
                 foreach (var region in listOfRegions)
                 {

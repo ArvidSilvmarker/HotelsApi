@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using HotelsApi;
 using HotelsApi.Infrastructure;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -8,7 +9,7 @@ namespace HotelsApiTest
     [TestClass]
     public class UnitTest1
     {
-        private FileReader fille = new FileReader();
+        private FileReader fille = new FileReader(new AppConfiguration());
         [TestInitialize]
         public void Init()
         {
