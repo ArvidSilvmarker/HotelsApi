@@ -47,5 +47,11 @@ namespace HotelsApiTest
             var hotel = hotelList[0];
             Assert.AreEqual(50, hotel.RegionValue);
         }
+
+        [TestMethod]
+        public void TestWrongFormatException()
+        {
+            Assert.ThrowsException<ArgumentException>(() => fille.ReadScandicFile());
+        }
     }
 }
