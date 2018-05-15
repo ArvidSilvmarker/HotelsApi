@@ -22,6 +22,11 @@ namespace HotelsApiTest
             {
                 writetext.WriteLine("50,Scandic Rubinen,15");
             }
+
+            using (StreamWriter writetext = new StreamWriter($@"C:\Hotels\BestWestern-{DateTime.Now:yyyy-MM-dd}.json"))
+            {
+                writetext.WriteLine("[{\"Reg\": 50, \"Name\": \"Hotell Eggers\", \"LedigaRum\": 100}]");
+            }
         }
 
         [TestMethod]
@@ -32,9 +37,15 @@ namespace HotelsApiTest
             Assert.AreEqual(50, hotel.RegionValue);
             Assert.AreEqual("Scandic Rubinen", hotel.Name);
             Assert.AreEqual(15, hotel.RoomsAvailable);
-            //Assert.AreEqual(50, fille.ReadScandicFile()[0].RegionValue);
-            //Assert.AreEqual("Scandic Rubinen", fille.ReadScandicFile()[0].Name);
-            //Assert.AreEqual(15, fille.ReadScandicFile()[0].RoomsAvailable);
+        }
+
+
+        [TestMethod]
+        public void TestBestWestern()
+        {
+            var hotelList = fille.ReadBestWesternHotels();
+            var hotel = hotelList[0];
+            Assert.AreEqual(50, hotel.RegionValue);
         }
     }
 }
