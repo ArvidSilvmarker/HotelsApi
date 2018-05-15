@@ -10,7 +10,7 @@ namespace HotelsApiTest
     [TestClass]
     public class UnitTest1
     {
-        private FileReader fille = new FileReader(new AppConfiguration(){ImportPath = "Hotels"});
+        private FileReader fille = new FileReader(new AppConfiguration(){ImportPath = "C:\\Hotels"});
 
         [TestInitialize]
         public void Init()
@@ -18,9 +18,9 @@ namespace HotelsApiTest
             //File.Create($@"C:\Project\AcceleratedLearning\HotelAPI\HotelsApi\HotelsApi\Hotels\Scandic-{DateTime.Now:yyyy-MM-dd}.txt");
             //File.WriteAllText($@"C:\Project\AcceleratedLearning\HotelAPI\HotelsApi\HotelsApi\Hotels\Scandic-{DateTime.Now:yyyy-MM-dd}.txt", "50,Scandic Rubinen,15");
 
-            using (StreamWriter writetext = new StreamWriter($@"C:\Project\AcceleratedLearning\HotelAPI\HotelsApi\HotelsApi\Hotels\Scandic-{DateTime.Now:yyyy-MM-dd}.txt"))
+            using (StreamWriter writetext = new StreamWriter($@"C:\Hotels\Scandic-{DateTime.Now:yyyy-MM-dd}.txt"))
             {
-                writetext.WriteLine("50, Scandic Rubinen, 15");
+                writetext.WriteLine("50,Scandic Rubinen,15");
             }
         }
 

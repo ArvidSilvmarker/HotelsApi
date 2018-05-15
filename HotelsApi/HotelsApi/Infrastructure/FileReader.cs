@@ -49,9 +49,9 @@ namespace HotelsApi.Infrastructure
                 var hotelString = line.Split(',');
                 hotelList.Add(new Hotel
                 {
-                    RegionValue = Convert.ToInt32(hotelString[0]),
-                    Name = hotelString[1],
-                    RoomsAvailable = Convert.ToInt32(hotelString[2])
+                    RegionValue = Convert.ToInt32(hotelString[0].Trim()),
+                    Name = hotelString[1].Trim(),
+                    RoomsAvailable = Convert.ToInt32(hotelString[2].Trim())
                 });
             }
 
