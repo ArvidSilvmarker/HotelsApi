@@ -15,9 +15,7 @@ namespace HotelsApiTest
         [TestInitialize]
         public void Init()
         {
-
             fille = new FileReader(new AppConfiguration { ImportPath = "C:\\Hotels" });
-
         }
 
         [TestMethod]
