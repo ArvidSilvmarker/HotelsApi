@@ -2,7 +2,6 @@
 using HotelsApi.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using HotelsApi.Infrastructure;
 
 namespace HotelsApi.Controllers
 {

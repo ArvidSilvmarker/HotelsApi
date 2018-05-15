@@ -4,6 +4,8 @@ using System.IO;
 using System.Net;
 using HotelsApi.Domain;
 using HotelsApi.Domain.Interfaces;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Newtonsoft.Json;
 
 namespace HotelsApi.Infrastructure
@@ -86,14 +88,22 @@ namespace HotelsApi.Infrastructure
             var hotels = new List<Hotel>();
             foreach (var bestWesternHotel in bestWesternHotels)
             {
-                hotels.Add(new Hotel{
+                var hotel = new Hotel
+                {
                     RegionValue = bestWesternHotel.Reg,
                     Name = bestWesternHotel.Name,
                     RoomsAvailable = bestWesternHotel.LedigaRum
-                });
+                };
+                
+                hotels.Add(hotel);
             }
 
             return hotels;
+        }
+
+        public void validateHotel(Hotel hotel)
+        {
+
         }
     }
 }

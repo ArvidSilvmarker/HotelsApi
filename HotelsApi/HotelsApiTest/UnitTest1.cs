@@ -36,5 +36,6 @@ namespace HotelsApiTest
             //Assert.AreEqual("Scandic Rubinen", fille.ReadScandicFile()[0].Name);
             //Assert.AreEqual(15, fille.ReadScandicFile()[0].RoomsAvailable);
         }
+
     }
 }
