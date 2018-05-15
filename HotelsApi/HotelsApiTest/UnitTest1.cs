@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using HotelsApi;
 using HotelsApi.Infrastructure;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -9,13 +10,18 @@ namespace HotelsApiTest
     [TestClass]
     public class UnitTest1
     {
-        private FileReader fille = new FileReader();
+        private FileReader fille = new FileReader(new AppConfiguration(){ImportPath = "Hotels"});
 
         [TestInitialize]
         public void Init()
         {
-            File.Create($@"wwwroot\Hotels\Scandic-{DateTime.Now:yyyy-MM-dd}.txt");
-            File.WriteAllText($@"wwwroot\Hotels\Scandic-{DateTime.Now:yyyy-MM-dd}.txt", "50,Scandic Rubinen,15");
+            //File.Create($@"C:\Project\AcceleratedLearning\HotelAPI\HotelsApi\HotelsApi\Hotels\Scandic-{DateTime.Now:yyyy-MM-dd}.txt");
+            //File.WriteAllText($@"C:\Project\AcceleratedLearning\HotelAPI\HotelsApi\HotelsApi\Hotels\Scandic-{DateTime.Now:yyyy-MM-dd}.txt", "50,Scandic Rubinen,15");
+
+            using (StreamWriter writetext = new StreamWriter($@"C:\Project\AcceleratedLearning\HotelAPI\HotelsApi\HotelsApi\Hotels\Scandic-{DateTime.Now:yyyy-MM-dd}.txt"))
+            {
+                writetext.WriteLine("50, Scandic Rubinen, 15");
+            }
         }
 
         [TestMethod]
