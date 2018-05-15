@@ -13,7 +13,7 @@ namespace HotelsApi.Common
         {
             var context = new ValidationContext(hotel);
             var results = new List<ValidationResult>();
-            return Validator.TryValidateObject(hotel, context, results);
+            return Validator.TryValidateObject(hotel, context, results, true);
         }
     }
 }
