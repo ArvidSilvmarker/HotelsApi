@@ -60,7 +60,8 @@ namespace HotelsApi.Infrastructure
             {
                 if (File.Exists($@"wwwroot\Hotels\BestWestern-{date:yyyy-MM-dd}.json"))
                 {
-                    var bestWesternHotel = JsonConvert.DeserializeObject<List<BestWesternHotel>>(File.ReadAllText($@"wwwroot\Hotels\BestWestern-{date:yyyy-MM-dd}.json"));
+                    var json = File.ReadAllText($@"wwwroot\Hotels\BestWestern-{date:yyyy-MM-dd}.json");
+                    var bestWesternHotel = JsonConvert.DeserializeObject<List<BestWesternHotel>>(json);
                     return MapBestWesternToHotels(bestWesternHotel);
                 }
             }
