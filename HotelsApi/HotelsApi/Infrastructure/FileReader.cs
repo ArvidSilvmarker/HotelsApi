@@ -17,6 +17,7 @@ namespace HotelsApi.Infrastructure
 
             return allHotels;
         }
+
         public List<Hotel> ReadScandicFile()
         {
             var dateTimeStop = new DateTime(2018, 01, 01);
@@ -28,7 +29,6 @@ namespace HotelsApi.Infrastructure
                     string[] lines = File.ReadAllLines($@"wwwroot\Hotels\Scandic-{date:yyyy-MM-dd}.txt");
                     return MapScandicToHotels(lines);
                 }
-               
             }
                 
             return null;
