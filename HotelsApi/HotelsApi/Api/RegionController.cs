@@ -93,10 +93,8 @@ namespace HotelsApi.Controllers
         [HttpGet("hotels")]
         public IActionResult GetHotels()
         {
-            try
-            {
-
-
+            //try
+            //{
                 var hotelList = _fileReader.ReadAllHotels();
                 var listOfRegions = _regionRepository.ReadAllRegions();
                 foreach (var region in listOfRegions)
@@ -110,11 +108,11 @@ namespace HotelsApi.Controllers
                     }
                 }
                 return Json(listOfRegions);
-            }
-            catch (Exception exception)
-            {
-                return BadRequest(exception.Message);
-            }
+            //}
+            //catch (Exception exception)
+            //{
+            //    return BadRequest(exception.Message);
+            //}
            
         }
 

@@ -27,16 +27,18 @@ namespace HotelsApi.Infrastructure
         {
             var dateTimeStop = new DateTime(2018, 01, 01);
             var path = _appConfiguration.ImportPath;
+            var scandicHotels = new List<Hotel>();
             for (var date = DateTime.Now; date > dateTimeStop; date = date.AddDays(-1))
             {
                 if (File.Exists($@"{path}\Scandic-{date:yyyy-MM-dd}.txt"))
                 {
                     string[] lines = File.ReadAllLines($@"{path}\Scandic-{date:yyyy-MM-dd}.txt");
-                    return MapScandicToHotels(lines);
+                    scandicHotels = MapScandicToHotels(lines);
+                    break;
                 }
             }
-                
-            return null;
+
+            return scandicHotels;
         }
 
         public List<Hotel> MapScandicToHotels(string[] lines)
@@ -60,6 +62,7 @@ namespace HotelsApi.Infrastructure
         public List<Hotel> ReadBestWesternHotels()
         {
             var dateTimeStop = new DateTime(2018, 01, 01);
+            var bestWesternHotelsList = new List<Hotel>();
 
             for (var date = DateTime.Now; date > dateTimeStop; date = date.AddDays(-1))
             {
@@ -67,11 +70,12 @@ namespace HotelsApi.Infrastructure
                 {
                     var json = File.ReadAllText($@"wwwroot\Hotels\BestWestern-{date:yyyy-MM-dd}.json");
                     var bestWesternHotel = JsonConvert.DeserializeObject<List<BestWesternHotel>>(json);
-                    return MapBestWesternToHotels(bestWesternHotel);
+                    bestWesternHotelsList = MapBestWesternToHotels(bestWesternHotel);
+                    break;
                 }
             }
 
-            return null;
+            return bestWesternHotelsList;
         }
 
         private List<Hotel> MapBestWesternToHotels(List<BestWesternHotel> bestWesternHotels)
