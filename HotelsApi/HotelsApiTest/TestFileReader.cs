@@ -50,6 +50,7 @@ namespace HotelsApiTest
             Assert.AreEqual(100, hotel.RoomsAvailable);
         }
 
+
         [TestMethod]
         public void FormatExceptionScandic()
         {
