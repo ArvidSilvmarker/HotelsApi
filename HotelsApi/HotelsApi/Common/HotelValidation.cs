@@ -9,14 +9,11 @@ namespace HotelsApi.Common
 {
     public class HotelValidation
     {
-
         public static bool ValidateHotel(Hotel hotel)
         {
             var context = new ValidationContext(hotel);
             var results = new List<ValidationResult>();
             return Validator.TryValidateObject(hotel, context, results);
         }
-        
-
     }
 }
