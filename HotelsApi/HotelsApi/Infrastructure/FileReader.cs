@@ -61,7 +61,7 @@ namespace HotelsApi.Infrastructure
                 if (HotelValidation.ValidateHotel(hotel))
                     hotels.Add(hotel);
                 else
-                    throw new ArgumentException("Error in format.");
+                    throw new FormatException("Error in format.");
             }
 
             return hotels;
@@ -80,6 +80,8 @@ namespace HotelsApi.Infrastructure
                 {
                     var json = File.ReadAllText($@"{path}\BestWestern-{date:yyyy-MM-dd}.json");
                     var bestWesternHotel = JsonConvert.DeserializeObject<List<BestWesternHotel>>(json);
+                    if (bestWesternHotel == null)
+                        throw new FormatException("Error in format");
                     bestWesternHotelsList = MapBestWesternToHotels(bestWesternHotel);
                     break;
                 }
