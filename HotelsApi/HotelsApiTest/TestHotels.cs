@@ -48,6 +48,7 @@ namespace HotelsApiTest
             Assert.AreEqual(50, hotel.RegionValue);
         }
 
+
         [TestMethod]
         public void TestWrongFormatException()
         {

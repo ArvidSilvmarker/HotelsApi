@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27428.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelsApi", "HotelsApi\HotelsApi.csproj", "{7AB99ED8-23E0-43CF-916B-9E215838FE97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelsApiTest", "HotelsApiTest\HotelsApiTest.csproj", "{7290A8D9-C331-43BF-A387-13C79B2A037F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelsApiTest", "HotelsApiTest\HotelsApiTest.csproj", "{7290A8D9-C331-43BF-A387-13C79B2A037F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
