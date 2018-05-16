@@ -23,13 +23,13 @@ namespace HotelsApiTest
         {
             using (StreamWriter writetext = new StreamWriter($@"C:\Hotels\Scandic-{DateTime.Now:yyyy-MM-dd}.txt"))
             {
-                writetext.WriteLine("50,Scandic Rubinen,15");
+                writetext.WriteLine("50,Scandic Pölse,15");
             }
 
             var hotelList = fille.ReadScandicFile();
             var hotel = hotelList[0];
             Assert.AreEqual(50, hotel.RegionValue);
-            Assert.AreEqual("Scandic Rubinen", hotel.Name);
+            Assert.AreEqual("Scandic Pölse", hotel.Name);
             Assert.AreEqual(15, hotel.RoomsAvailable);
         }
 
@@ -124,5 +124,6 @@ namespace HotelsApiTest
         {
             Assert.AreEqual(null, fille.MapBestWesternToHotels(null));
         }
+
     }
 }
