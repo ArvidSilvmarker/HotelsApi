@@ -71,9 +71,7 @@ namespace HotelsApi.Infrastructure
             }
         }
 
-        public bool IsDatabaseUp() =>
-            (_context.Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator).Exists();
-
+        
         public bool IsDatabaseRunning()
         {
             try
@@ -81,7 +79,7 @@ namespace HotelsApi.Infrastructure
                 _context.Database.OpenConnection();
                 _context.Database.CloseConnection();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }
