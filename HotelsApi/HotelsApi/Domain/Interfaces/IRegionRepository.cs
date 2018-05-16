@@ -13,5 +13,6 @@ namespace HotelsApi.Domain.Interfaces
         void UpdateRegion(Region region);
         void DeleteRegion(int id);
         void ReSeedRegions();
+        bool IsDatabaseRunning();
     }
 }

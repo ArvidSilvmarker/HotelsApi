@@ -1,7 +1,11 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using HotelsApi.Domain;
 using HotelsApi.Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Storage;
 
 
 namespace HotelsApi.Infrastructure
@@ -65,6 +69,24 @@ namespace HotelsApi.Infrastructure
             { 
                 DeleteRegion(region.Id);
             }
+        }
+
+        public bool IsDatabaseUp() =>
+            (_context.Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator).Exists();
+
+        public bool IsDatabaseRunning()
+        {
+            try
+            {
+                _context.Database.OpenConnection();
+                _context.Database.CloseConnection();
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
