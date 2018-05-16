@@ -38,9 +38,7 @@ namespace HotelsApi.Api
         public IActionResult ScandicFileToday()
         {
             if (_fileReader.LatestScandicFile(DateTime.Now).Date == DateTime.Now.Date)
-            {
                 return Ok("Ffffound");
-            }
 
             return NoContent();
         }
@@ -53,5 +51,24 @@ namespace HotelsApi.Api
             return NoContent();
         }
 
+        [HttpGet("scandic/soft")]
+        public IActionResult ScandicFileTodayOrYesterday()
+        {
+            var scandicFile = _fileReader.LatestScandicFile(DateTime.Now);
+            if (scandicFile.Date == DateTime.Now.Date || (scandicFile.Date == DateTime.Now.AddDays(-1).Date && DateTime.Now.Hour < 10 ))
+                return Ok("Ffffound");
+
+            return NoContent();
+        }
+
+        [HttpGet("bestwestern/soft")]
+        public IActionResult BestWesternFileTodayOrYesterday()
+        {
+            var bestWesternFile = _fileReader.LatestBestWesternFile(DateTime.Now);
+            if (bestWesternFile.Date == DateTime.Now.Date || (bestWesternFile.Date == DateTime.Now.AddDays(-1).Date && DateTime.Now.Hour < 10))
+                return Ok("Ffffound");
+
+            return NoContent();
+        }
     }
 }
