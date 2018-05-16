@@ -49,5 +49,25 @@ namespace HotelsApi.Api
             return NoContent();
         }
 
+        [HttpGet("scandic/soft")]
+        public IActionResult ScandicFileTodayOrYesterday()
+        {
+            var scandicFile = _fileReader.GetLatestScandicFile(DateTime.Now);
+            if (scandicFile.Date == DateTime.Now.Date || (scandicFile.Date == DateTime.Now.AddDays(-1).Date && DateTime.Now.Hour < 10))
+                return Ok("Ffffound");
+
+            return NoContent();
+        }
+
+        [HttpGet("bestwestern/soft")]
+        public IActionResult BestWesternFileTodayOrYesterday()
+        {
+            var bestWesternFile = _fileReader.GetLatestBestWesternFile(DateTime.Now);
+            if (bestWesternFile.Date == DateTime.Now.Date || (bestWesternFile.Date == DateTime.Now.AddDays(-1).Date && DateTime.Now.Hour < 10))
+                return Ok("Ffffound");
+
+            return NoContent();
+        }
+
     }
 }
