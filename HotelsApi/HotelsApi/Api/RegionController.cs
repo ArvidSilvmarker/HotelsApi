@@ -21,14 +21,10 @@ namespace HotelsApi.Controllers
         public IActionResult AddRegion(Region region)
         {
             if (region == null)
-            {
                 return BadRequest("Region is null");
-            }
 
             if (!ModelState.IsValid)
-            {
                 return BadRequest(ModelState);
-            }
 
             try
             {
@@ -85,24 +81,22 @@ namespace HotelsApi.Controllers
             {
                 return BadRequest(exception.Message);
             }
-
         }
 
         [HttpGet("hotels")]
         public IActionResult GetHotels()
         {
-            //try
-            //{
-            var listOfRegions = _hotelService.GetAllRegionsWithHotels();
-            return Json(listOfRegions);
-            //}
-            //catch (Exception exception)
-            //{
-            //    return BadRequest(exception.Message);
-            //}
-           
+            try
+            {
+                var listOfRegions = _hotelService.GetAllRegionsWithHotels();
+                return Json(listOfRegions);
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
         }
 
-       
+
     }
 }

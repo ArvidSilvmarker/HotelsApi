@@ -18,7 +18,6 @@ namespace HotelsApi.Api
             _regionRepository = regionRepository;
             _fileReader = fileReader;
         }
-        
 
         [HttpGet]
         public IActionResult SiteIsRuning()
@@ -37,18 +36,15 @@ namespace HotelsApi.Api
         [HttpGet("scandic")]
         public IActionResult ScandicFileToday()
         {
-            if (_fileReader.LatestScandicFile(DateTime.Now).Date == DateTime.Now.Date)
-            {
+            if (_fileReader.GetLatestScandicFile(DateTime.Now).Date == DateTime.Now.Date)
                 return Ok("Ffffound");
-            }
-
             return NoContent();
         }
 
         [HttpGet("bestwestern")]
         public IActionResult BestWesternFileToday()
         {
-            if (_fileReader.LatestBestWesternFile(DateTime.Now).Date == DateTime.Now.Date)
+            if (_fileReader.GetLatestBestWesternFile(DateTime.Now).Date == DateTime.Now.Date)
                 return Ok("Ffffound");
             return NoContent();
         }
