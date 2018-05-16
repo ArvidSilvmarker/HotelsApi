@@ -31,10 +31,5 @@ namespace HotelsApi.Api
             return BadRequest();
         }
 
-        [HttpGet("scandic")]
-        public IActionResult ScandicFileToday()
-        {
-            
-        }
     }
 }

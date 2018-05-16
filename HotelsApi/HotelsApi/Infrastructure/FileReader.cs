@@ -29,30 +29,31 @@ namespace HotelsApi.Infrastructure
             return allHotels;
         }
 
-        public DateTime LatestScandicFile()
+        public HotelFile LatestScandicFile()
         {
-            var path = _appConfiguration.ImportPath;
+            var importPath = _appConfiguration.ImportPath;
 
             for (var date = DateTime.Now; date > _dateTimeStop; date = date.AddDays(-1))
             {
-                if (File.Exists($@"{path}\Scandic-{date:yyyy-MM-dd}.txt"))
+                string fullPath = $@"{importPath}\Scandic-{date:yyyy-MM-dd}.txt";
+                if (File.Exists(fullPath))
                 {
-                    return date;
+                    return new HotelFile {Date = date, Path = fullPath, Exists = true};
                 }
             }
 
-            return _dateTimeStop;
+            return new HotelFile {Exists = false};
         }
 
         public List<Hotel> ReadScandicFile()
         {
             var path = _appConfiguration.ImportPath;
             var scandicHotels = new List<Hotel>();
-            var date = LatestScandicFile();
-
-            if (date != _dateTimeStop && File.Exists($@"{path}\Scandic-{date:yyyy-MM-dd}.txt"))
+            var hotelFile = LatestScandicFile();
+        
+            if (hotelFile.Exists)
             {
-                string[] lines = File.ReadAllLines($@"{path}\Scandic-{date:yyyy-MM-dd}.txt");
+                string[] lines = File.ReadAllLines(hotelFile.Path);
                 scandicHotels = MapScandicToHotels(lines);
             }
 
@@ -84,23 +85,36 @@ namespace HotelsApi.Infrastructure
             return hotels;
         }
 
+        public HotelFile LatestBestWesternFile()
+        {
+            var importPath = _appConfiguration.ImportPath;
+
+            for (var date = DateTime.Now; date > _dateTimeStop; date = date.AddDays(-1))
+            {
+                string fullPath = $@"{importPath}\BestWestern-{date:yyyy-MM-dd}.json";
+                if (File.Exists(fullPath))
+                {
+                    return new HotelFile { Date = date, Path = fullPath, Exists = true };
+                }
+            }
+
+            return new HotelFile { Exists = false };
+        }
+
         public List<Hotel> ReadBestWesternHotels()
         {
-            var dateTimeStop = new DateTime(2018, 01, 01);
+
             var bestWesternHotelsList = new List<Hotel>();
             var path = _appConfiguration.ImportPath;
+            var hotelFile = LatestBestWesternFile();
 
-            for (var date = DateTime.Now; date > dateTimeStop; date = date.AddDays(-1))
+            if (hotelFile.Exists)
             {
-                if (File.Exists($@"{path}\BestWestern-{date:yyyy-MM-dd}.json"))
-                {
-                    var json = File.ReadAllText($@"{path}\BestWestern-{date:yyyy-MM-dd}.json");
-                    var bestWesternHotel = JsonConvert.DeserializeObject<List<BestWesternHotel>>(json);
-                    if (bestWesternHotel == null)
-                        throw new FormatException("Error in format");
-                    bestWesternHotelsList = MapBestWesternToHotels(bestWesternHotel);
-                    break;
-                }
+                var json = File.ReadAllText(hotelFile.Path);
+                var bestWesternHotel = JsonConvert.DeserializeObject<List<BestWesternHotel>>(json);
+                if (bestWesternHotel == null)
+                    throw new FormatException("Error in format");
+                bestWesternHotelsList = MapBestWesternToHotels(bestWesternHotel);
             }
 
             return bestWesternHotelsList;

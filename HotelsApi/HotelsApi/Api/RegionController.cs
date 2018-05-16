@@ -66,7 +66,6 @@ namespace HotelsApi.Controllers
             {
                 var listOfRegions = _regionRepository.ReadAllRegions();
                 return Json(listOfRegions);
-
             }
             catch (Exception exception)
             {
