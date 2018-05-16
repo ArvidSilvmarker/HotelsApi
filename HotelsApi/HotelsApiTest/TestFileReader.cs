@@ -112,5 +112,17 @@ namespace HotelsApiTest
             Assert.AreEqual("Hotell Eggers", hotel.Name);
             Assert.AreEqual(100, hotel.RoomsAvailable);
         }
+
+        [TestMethod]
+        public void MapScandicNull()
+        {
+            Assert.AreEqual(null, fille.MapScandicToHotels(null));
+        }
+
+        [TestMethod]
+        public void MapBestWesternNull()
+        {
+            Assert.AreEqual(null, fille.MapBestWesternToHotels(null));
+        }
     }
 }
