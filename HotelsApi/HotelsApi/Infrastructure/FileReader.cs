@@ -49,6 +49,10 @@ namespace HotelsApi.Infrastructure
         public List<Hotel> MapScandicToHotels(string[] lines)
         {
             var hotels = new List<Hotel>();
+
+            if (lines == null)
+                return null;
+
             foreach (string line in lines)
             {
                 var hotelString = line.Split(',');
@@ -93,6 +97,10 @@ namespace HotelsApi.Infrastructure
         public List<Hotel> MapBestWesternToHotels(List<BestWesternHotel> bestWesternHotels)
         {
             var hotels = new List<Hotel>();
+
+            if (bestWesternHotels == null)
+                return null;
+
             foreach (var bestWesternHotel in bestWesternHotels)
             {
                 var hotel = new Hotel

@@ -15,9 +15,7 @@ namespace HotelsApiTest
         [TestInitialize]
         public void Init()
         {
-
             fille = new FileReader(new AppConfiguration { ImportPath = "C:\\Hotels" });
-
         }
 
         [TestMethod]
@@ -113,6 +111,18 @@ namespace HotelsApiTest
             Assert.AreEqual(50, hotel.RegionValue);
             Assert.AreEqual("Hotell Eggers", hotel.Name);
             Assert.AreEqual(100, hotel.RoomsAvailable);
+        }
+
+        [TestMethod]
+        public void MapScandicNull()
+        {
+            Assert.AreEqual(null, fille.MapScandicToHotels(null));
+        }
+
+        [TestMethod]
+        public void MapBestWesternNull()
+        {
+            Assert.AreEqual(null, fille.MapBestWesternToHotels(null));
         }
     }
 }
