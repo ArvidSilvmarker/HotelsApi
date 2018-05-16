@@ -8,7 +8,7 @@ namespace HotelsApi.Domain.Interfaces
     public interface IFileReader
     {
         List<Hotel> ReadAllHotels();
-        HotelFile LatestScandicFile();
-        HotelFile LatestBestWesternFile();
+        HotelFile LatestScandicFile(DateTime fromDate);
+        HotelFile LatestBestWesternFile(DateTime fromDate);
     }
 }

@@ -29,11 +29,11 @@ namespace HotelsApi.Infrastructure
             return allHotels;
         }
 
-        public HotelFile LatestScandicFile()
+        public HotelFile LatestScandicFile(DateTime fromDate)
         {
             var importPath = _appConfiguration.ImportPath;
 
-            for (var date = DateTime.Now.Date; date > _dateTimeStop; date = date.AddDays(-1))
+            for (var date = fromDate.Date; date > _dateTimeStop; date = date.AddDays(-1))
             {
                 string fullPath = $@"{importPath}\Scandic-{date:yyyy-MM-dd}.txt";
                 if (File.Exists(fullPath))
@@ -49,7 +49,7 @@ namespace HotelsApi.Infrastructure
         {
             var path = _appConfiguration.ImportPath;
             var scandicHotels = new List<Hotel>();
-            var hotelFile = LatestScandicFile();
+            var hotelFile = LatestScandicFile(DateTime.Now);
         
             if (hotelFile.Exists)
             {
@@ -85,11 +85,11 @@ namespace HotelsApi.Infrastructure
             return hotels;
         }
 
-        public HotelFile LatestBestWesternFile()
+        public HotelFile LatestBestWesternFile(DateTime fromDate)
         {
             var importPath = _appConfiguration.ImportPath;
 
-            for (var date = DateTime.Now.Date; date > _dateTimeStop; date = date.AddDays(-1))
+            for (var date = fromDate.Date; date > _dateTimeStop; date = date.AddDays(-1))
             {
                 string fullPath = $@"{importPath}\BestWestern-{date:yyyy-MM-dd}.json";
                 if (File.Exists(fullPath))
@@ -106,7 +106,7 @@ namespace HotelsApi.Infrastructure
 
             var bestWesternHotelsList = new List<Hotel>();
             var path = _appConfiguration.ImportPath;
-            var hotelFile = LatestBestWesternFile();
+            var hotelFile = LatestBestWesternFile(DateTime.Now);
 
             if (hotelFile.Exists)
             {
