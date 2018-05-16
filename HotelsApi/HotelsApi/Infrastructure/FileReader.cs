@@ -13,6 +13,8 @@ namespace HotelsApi.Infrastructure
 {
     public class FileReader : IFileReader
     {
+        private DateTime _dateTimeStop = new DateTime(2018, 01, 01);
+
         private AppConfiguration _appConfiguration;
         public FileReader(AppConfiguration appConfiguration)
         {
@@ -27,20 +29,31 @@ namespace HotelsApi.Infrastructure
             return allHotels;
         }
 
-        public List<Hotel> ReadScandicFile()
+        public DateTime LatestScandicFile()
         {
-            var dateTimeStop = new DateTime(2018, 01, 01);
             var path = _appConfiguration.ImportPath;
-            var scandicHotels = new List<Hotel>();
 
-            for (var date = DateTime.Now; date > dateTimeStop; date = date.AddDays(-1))
+            for (var date = DateTime.Now; date > _dateTimeStop; date = date.AddDays(-1))
             {
                 if (File.Exists($@"{path}\Scandic-{date:yyyy-MM-dd}.txt"))
                 {
-                    string[] lines = File.ReadAllLines($@"{path}\Scandic-{date:yyyy-MM-dd}.txt");
-                    scandicHotels = MapScandicToHotels(lines);
-                    break;
+                    return date;
                 }
+            }
+
+            return _dateTimeStop;
+        }
+
+        public List<Hotel> ReadScandicFile()
+        {
+            var path = _appConfiguration.ImportPath;
+            var scandicHotels = new List<Hotel>();
+            var date = LatestScandicFile();
+
+            if (date != _dateTimeStop && File.Exists($@"{path}\Scandic-{date:yyyy-MM-dd}.txt"))
+            {
+                string[] lines = File.ReadAllLines($@"{path}\Scandic-{date:yyyy-MM-dd}.txt");
+                scandicHotels = MapScandicToHotels(lines);
             }
 
             return scandicHotels;
@@ -70,7 +83,6 @@ namespace HotelsApi.Infrastructure
 
             return hotels;
         }
-
 
         public List<Hotel> ReadBestWesternHotels()
         {

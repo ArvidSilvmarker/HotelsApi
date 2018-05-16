@@ -30,5 +30,11 @@ namespace HotelsApi.Api
                 return Ok("Database is running");
             return BadRequest();
         }
+
+        [HttpGet("scandic")]
+        public IActionResult ScandicFileToday()
+        {
+            
+        }
     }
 }
