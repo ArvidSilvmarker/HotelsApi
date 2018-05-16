@@ -24,6 +24,7 @@ namespace HotelsApi
         {
             var appConfiguration = Configuration.GetSection("AppConfiguration").Get<AppConfiguration>();
             services.AddSingleton(appConfiguration);
+            services.AddSingleton<IFileReader, FileReader>();
             services.AddScoped<IRegionRepository, RegionRepository>();
             services.AddDbContext<HotelContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));

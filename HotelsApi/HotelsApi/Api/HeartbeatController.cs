@@ -11,11 +11,14 @@ namespace HotelsApi.Api
     public class HeartbeatController : Controller
     {
         private IRegionRepository _regionRepository;
+        private IFileReader _fileReader;
 
-        public HeartbeatController(IRegionRepository regionRepository)
+        public HeartbeatController(IRegionRepository regionRepository, IFileReader fileReader)
         {
             _regionRepository = regionRepository;
+            _fileReader = fileReader;
         }
+        
 
         [HttpGet]
         public IActionResult SiteIsRuning()
@@ -29,6 +32,17 @@ namespace HotelsApi.Api
             if (_regionRepository.IsDatabaseRunning())
                 return Ok("Database is running");
             return BadRequest();
+        }
+
+        [HttpGet("scandic")]
+        public IActionResult ScandicFileToday()
+        {
+            if (_fileReader.LatestScandicFile().Date == DateTime.Now)
+            {
+                return Ok("Ffffound");
+            }
+
+            return NoContent();
         }
 
     }
