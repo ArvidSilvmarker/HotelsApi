@@ -37,7 +37,7 @@ namespace HotelsApi.Api
         [HttpGet("scandic")]
         public IActionResult ScandicFileToday()
         {
-            if (_fileReader.LatestScandicFile().Date == DateTime.Now)
+            if (_fileReader.LatestScandicFile().Date == DateTime.Now.Date)
             {
                 return Ok("Ffffound");
             }

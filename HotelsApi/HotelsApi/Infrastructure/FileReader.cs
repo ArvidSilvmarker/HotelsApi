@@ -33,7 +33,7 @@ namespace HotelsApi.Infrastructure
         {
             var importPath = _appConfiguration.ImportPath;
 
-            for (var date = DateTime.Now; date > _dateTimeStop; date = date.AddDays(-1))
+            for (var date = DateTime.Now.Date; date > _dateTimeStop; date = date.AddDays(-1))
             {
                 string fullPath = $@"{importPath}\Scandic-{date:yyyy-MM-dd}.txt";
                 if (File.Exists(fullPath))
@@ -89,7 +89,7 @@ namespace HotelsApi.Infrastructure
         {
             var importPath = _appConfiguration.ImportPath;
 
-            for (var date = DateTime.Now; date > _dateTimeStop; date = date.AddDays(-1))
+            for (var date = DateTime.Now.Date; date > _dateTimeStop; date = date.AddDays(-1))
             {
                 string fullPath = $@"{importPath}\BestWestern-{date:yyyy-MM-dd}.json";
                 if (File.Exists(fullPath))
