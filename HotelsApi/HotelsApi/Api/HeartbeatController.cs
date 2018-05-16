@@ -37,11 +37,19 @@ namespace HotelsApi.Api
         [HttpGet("scandic")]
         public IActionResult ScandicFileToday()
         {
-            if (_fileReader.LatestScandicFile().Date == DateTime.Now.Date)
+            if (_fileReader.LatestScandicFile(DateTime.Now).Date == DateTime.Now.Date)
             {
                 return Ok("Ffffound");
             }
 
+            return NoContent();
+        }
+
+        [HttpGet("bestwestern")]
+        public IActionResult BestWesternFileToday()
+        {
+            if (_fileReader.LatestBestWesternFile(DateTime.Now).Date == DateTime.Now.Date)
+                return Ok("Ffffound");
             return NoContent();
         }
 
